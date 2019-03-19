@@ -24,7 +24,8 @@ set(mgr_srcs
 add_executable(ceph-mgr ${mgr_srcs})
 target_include_directories(ceph-mgr SYSTEM PRIVATE "${PYTHON_INCLUDE_DIRS}")
 target_link_libraries(ceph-mgr
-  osdc client heap_profiler
+  osdc client heap_profiler rsg
+  ${THRIFT_LIBRARIES} ${SimGrid_LIBRARY} ${ZMQ_LIBRARIES}
   global-static ceph-common
   Boost::python${MGR_PYTHON_VERSION_MAJOR}${MGR_PYTHON_VERSION_MINOR}
   ${MGR_PYTHON_LIBRARIES} ${CMAKE_DL_LIBS} ${GSSAPI_LIBRARIES})

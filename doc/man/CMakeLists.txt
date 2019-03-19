@@ -10,6 +10,6 @@ add_custom_command(
   DEPENDS ${sphinx_input})
 
 add_custom_target(
-  manpages ALL
+  cephmanpages ALL
   DEPENDS ${sphinx_output}
   COMMENT "manpages building")

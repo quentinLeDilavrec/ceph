@@ -243,7 +243,7 @@ void MgrStandby::send_beacon()
 
     m->set_services(active_mgr->get_services());
   }
-                                 
+
   monc.send_mon_message(m);
 }
 
@@ -257,7 +257,7 @@ void MgrStandby::tick()
       new FunctionContext([this](int r){
           tick();
       }
-  )); 
+  ));
 }
 
 void MgrStandby::handle_signal(int signum)
@@ -499,4 +499,3 @@ std::string MgrStandby::state_str()
     return "active (starting)";
   }
 }
-

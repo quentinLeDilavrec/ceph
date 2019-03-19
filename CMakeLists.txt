@@ -26,6 +26,10 @@ if(POLICY CMP0075)
 endif()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
+find_package(SimGrid REQUIRED)
+find_package(ZMQ REQUIRED)
+find_package(Thrift REQUIRED)
+
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(LINUX ON)
   FIND_PACKAGE(Threads)
@@ -136,20 +140,20 @@ CHECK_INCLUDE_FILES("valgrind/helgrind.h" HAVE_VALGRIND_HELGRIND_H)
 
 include(CheckTypeSize)
 set(CMAKE_EXTRA_INCLUDE_FILES "linux/types.h")
-CHECK_TYPE_SIZE(__be16 __BE16) 
-CHECK_TYPE_SIZE(__be32 __BE32) 
-CHECK_TYPE_SIZE(__be64 __BE64) 
-CHECK_TYPE_SIZE(__le16 __LE16) 
-CHECK_TYPE_SIZE(__le32 __LE32) 
-CHECK_TYPE_SIZE(__le64 __LE64) 
-CHECK_TYPE_SIZE(__u8 __U8) 
-CHECK_TYPE_SIZE(__u16 __U16) 
-CHECK_TYPE_SIZE(__u32 __U32) 
-CHECK_TYPE_SIZE(__u64 __U64) 
-CHECK_TYPE_SIZE(__s8 __S8) 
-CHECK_TYPE_SIZE(__s16 __S16) 
-CHECK_TYPE_SIZE(__s32 __S32) 
-CHECK_TYPE_SIZE(__s64 __S64) 
+CHECK_TYPE_SIZE(__be16 __BE16)
+CHECK_TYPE_SIZE(__be32 __BE32)
+CHECK_TYPE_SIZE(__be64 __BE64)
+CHECK_TYPE_SIZE(__le16 __LE16)
+CHECK_TYPE_SIZE(__le32 __LE32)
+CHECK_TYPE_SIZE(__le64 __LE64)
+CHECK_TYPE_SIZE(__u8 __U8)
+CHECK_TYPE_SIZE(__u16 __U16)
+CHECK_TYPE_SIZE(__u32 __U32)
+CHECK_TYPE_SIZE(__u64 __U64)
+CHECK_TYPE_SIZE(__s8 __S8)
+CHECK_TYPE_SIZE(__s16 __S16)
+CHECK_TYPE_SIZE(__s32 __S32)
+CHECK_TYPE_SIZE(__s64 __S64)
 unset(CMAKE_EXTRA_INCLUDE_FILES)
 
 include(CheckSymbolExists)
@@ -515,7 +519,7 @@ option(WITH_MGR "ceph-mgr is enabled" ON)
 if(WITH_MGR)
   # Please specify 3 or 3.[0-7] if you want to build with python3 support.
   # FindPyhonInterp and FindPythonLibs think they belong to different families.
-  set(MGR_PYTHON_VERSION "2.7" CACHE
+  set(MGR_PYTHON_VERSION "3" CACHE
     STRING "minimal required version of python runtime for running mgr plugins. ")
   find_package(PythonInterp ${MGR_PYTHON_VERSION} REQUIRED)
   find_package(PythonLibs ${MGR_PYTHON_VERSION} REQUIRED)
@@ -573,7 +577,7 @@ option(PG_DEBUG_REFS "PG Ref debugging is enabled" OFF)
 
 option(WITH_TESTS "enable the build of ceph-test package scripts/binaries" ON)
 set(UNIT_TESTS_BUILT ${WITH_TESTS})
-set(CEPH_TEST_TIMEOUT 3600 CACHE STRING 
+set(CEPH_TEST_TIMEOUT 3600 CACHE STRING
   "Maximum time before a CTest gets killed" )
 
 # fio

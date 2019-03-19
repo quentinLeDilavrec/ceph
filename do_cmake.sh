@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/bash -x
 git submodule update --init --recursive
 if test -e build; then
     echo 'build dir already exists; rm -rf build and re-run'
@@ -32,14 +32,34 @@ if type ccache > /dev/null 2>&1 ; then
     ARGS="$ARGS -DWITH_CCACHE=ON"
 fi
 
-mkdir build
-cd build
+# Build SimGrid
+#if [ ! -d simgrid ]; then
+#    git clone https://framagit.org/simgrid/simgrid.git simgrid
+#fi
+#cd simgrid
+#mkdir -p build && cd build
+#cmake -DCMAKE_INSTALL_PREFIX=$PWD/../simgrid-install ..
+#source ../BuildSimGrid.sh
+#make -j$(nproc) && make install
+#cd ..
+
+# Build Remote SimGrid
+#if [ ! -d remote-simgrid ]; then
+#    git clone https://framagit.org/simgrid/remote-simgrid.git remote-simgrid
+#fi
+#cd remote-simgrid
+#mkdir -p build && cd build
+#cmake -DSimGrid_INCLUDE_DIR=$PWD/../simgrid-install/include -DSimGrid_LIBRARY=$PWD/../simgrid-#install/lib/libsimgrid.so -DCMAKE_INSTALL_PREFIX=$PWD../rsg-install ..
+#make -j$(nproc) && make install
+#cd ..
+
+mkdir build && cd build
 if type cmake3 > /dev/null 2>&1 ; then
     CMAKE=cmake3
 else
     CMAKE=cmake
 fi
-${CMAKE} -DCMAKE_BUILD_TYPE=Debug $ARGS "$@" .. || exit 1
+${CMAKE} -DWITH_SYSTEM_BOOST=ON -DWITH_PYTHON3=ON -WITH_PYTHON2=OFF -DCMAKE_BUILD_TYPE=Debug $ARGS "$@" .. || exit 1
 
 # minimal config to find plugins
 cat <<EOF > ceph.conf

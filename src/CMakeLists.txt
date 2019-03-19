@@ -476,7 +476,7 @@ add_executable(ceph-mon ${ceph_mon_srcs}
   $<TARGET_OBJECTS:common_texttable_obj>)
 add_dependencies(ceph-mon erasure_code_plugins)
 target_link_libraries(ceph-mon mon os global-static ceph-common
-  ${EXTRALIBS}
+  ${EXTRALIBS} rsg ${THRIFT_LIBRARIES} ${SimGrid_LIBRARY} ${ZMQ_LIBRARIES}
   ${CMAKE_DL_LIBS} ${GSSAPI_LIBRARIES})
 install(TARGETS ceph-mon DESTINATION bin)
 
@@ -503,8 +503,8 @@ set(ceph_osd_srcs
   ceph_osd.cc)
 add_executable(ceph-osd ${ceph_osd_srcs})
 add_dependencies(ceph-osd erasure_code_plugins)
-target_link_libraries(ceph-osd osd os global-static common
-  ${BLKID_LIBRARIES})
+target_link_libraries(ceph-osd osd os global-static common rsg
+  ${THRIFT_LIBRARIES} ${SimGrid_LIBRARY} ${ZMQ_LIBRARIES} ${BLKID_LIBRARIES})
 if(WITH_FUSE)
   target_link_libraries(ceph-osd ${FUSE_LIBRARIES})
 endif()
@@ -518,7 +518,7 @@ if (WITH_CEPHFS)
     ceph_mds.cc)
   add_executable(ceph-mds ${ceph_mds_srcs})
   target_link_libraries(ceph-mds mds ${CMAKE_DL_LIBS} global-static ceph-common
-    Boost::thread)
+  Boost::thread rsg ${THRIFT_LIBRARIES} ${SimGrid_LIBRARY} ${ZMQ_LIBRARIES})
   install(TARGETS ceph-mds DESTINATION bin)
 endif()
 
