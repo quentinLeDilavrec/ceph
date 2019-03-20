@@ -40,7 +40,7 @@ if [ ! -d simgrid ]; then
 fi
 cd simgrid
 mkdir -p build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=$PWD/../../simgrid-install ..w
+cmake -DCMAKE_INSTALL_PREFIX=$PWD/../../simgrid-install ..
 source ../BuildSimGrid.sh
 make -j$(nproc) && make install
 cd ..
