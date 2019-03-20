@@ -35,7 +35,8 @@ fi
 # Build SimGrid
 if [ ! -d simgrid ]; then
     wget https://github.com/simgrid/simgrid/archive/97b4fd8e435a44171d471a245142e6fd0eb992b2.tar.gz
-	tar xf 97b4fd8e435a44171d471a245142e6fd0eb992b2.tar.gz simgrid
+	tar xf 97b4fd8e435a44171d471a245142e6fd0eb992b2.tar.gz
+	mv 97b4fd8e435a44171d471a245142e6fd0eb992b2 simgrid
 fi
 cd simgrid
 mkdir -p build && cd build
