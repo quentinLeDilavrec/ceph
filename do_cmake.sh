@@ -32,6 +32,13 @@ if type ccache > /dev/null 2>&1 ; then
     ARGS="$ARGS -DWITH_CCACHE=ON"
 fi
 
+wget http://apache.lauf-forum.at/thrift/0.11.0/thrift-0.11.0.tar.gz
+tar -xvf thrift-0.11.0.tar.gz
+cd thrift-0.11.0
+./configure
+make && make install
+cd ..
+
 # Build SimGrid
 if [ ! -d simgrid ]; then
     wget https://github.com/simgrid/simgrid/archive/97b4fd8e435a44171d471a245142e6fd0eb992b2.tar.gz
