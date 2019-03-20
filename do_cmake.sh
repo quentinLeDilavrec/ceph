@@ -33,25 +33,26 @@ if type ccache > /dev/null 2>&1 ; then
 fi
 
 # Build SimGrid
-#if [ ! -d simgrid ]; then
-#    git clone https://framagit.org/simgrid/simgrid.git simgrid
-#fi
-#cd simgrid
-#mkdir -p build && cd build
-#cmake -DCMAKE_INSTALL_PREFIX=$PWD/../simgrid-install ..
-#source ../BuildSimGrid.sh
-#make -j$(nproc) && make install
-#cd ..
+if [ ! -d simgrid ]; then
+    wget https://github.com/simgrid/simgrid/archive/97b4fd8e435a44171d471a245142e6fd0eb992b2.tar.gz
+	tar xf 97b4fd8e435a44171d471a245142e6fd0eb992b2.tar.gz simgrid
+fi
+cd simgrid
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX=$PWD/../simgrid-install ..
+source ../BuildSimGrid.sh
+make -j$(nproc) && make install
+cd ..
 
-# Build Remote SimGrid
-#if [ ! -d remote-simgrid ]; then
-#    git clone https://framagit.org/simgrid/remote-simgrid.git remote-simgrid
-#fi
-#cd remote-simgrid
-#mkdir -p build && cd build
-#cmake -DSimGrid_INCLUDE_DIR=$PWD/../simgrid-install/include -DSimGrid_LIBRARY=$PWD/../simgrid-#install/lib/libsimgrid.so -DCMAKE_INSTALL_PREFIX=$PWD../rsg-install ..
-#make -j$(nproc) && make install
-#cd ..
+ Build Remote SimGrid
+if [ ! -d remote-simgrid ]; then
+    git clone https://framagit.org/simgrid/remote-simgrid.git remote-simgrid
+fi
+cd remote-simgrid
+mkdir -p build && cd build
+cmake -DSimGrid_INCLUDE_DIR=$PWD/../simgrid-install/include -DSimGrid_LIBRARY=$PWD/../simgrid-#install/lib/libsimgrid.so -DCMAKE_INSTALL_PREFIX=$PWD../rsg-install ..
+make -j$(nproc) && make install
+cd ..
 
 mkdir build && cd build
 if type cmake3 > /dev/null 2>&1 ; then
