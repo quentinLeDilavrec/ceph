@@ -44,7 +44,7 @@ source ../BuildSimGrid.sh
 make -j$(nproc) && make install
 cd ..
 
- Build Remote SimGrid
+# Build Remote SimGrid
 if [ ! -d remote-simgrid ]; then
     git clone https://framagit.org/simgrid/remote-simgrid.git remote-simgrid
 fi
