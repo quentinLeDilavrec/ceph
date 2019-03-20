@@ -60,7 +60,7 @@ if type cmake3 > /dev/null 2>&1 ; then
 else
     CMAKE=cmake
 fi
-${CMAKE} -DWITH_SYSTEM_BOOST=ON -DWITH_PYTHON3=ON -WITH_PYTHON2=OFF -DCMAKE_BUILD_TYPE=Debug $ARGS "$@" .. || exit 1
+${CMAKE} -DWITH_SYSTEM_BOOST=OFF -DWITH_PYTHON3=ON -WITH_PYTHON2=OFF -DCMAKE_BUILD_TYPE=Debug $ARGS "$@" .. || exit 1
 
 # minimal config to find plugins
 cat <<EOF > ceph.conf
