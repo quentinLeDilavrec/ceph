@@ -326,7 +326,7 @@ LIBRADOS_OPERATION_IGNORE_CACHE = _LIBRADOS_OPERATION_IGNORE_CACHE
 LIBRADOS_OPERATION_SKIPRWLOCKS = _LIBRADOS_OPERATION_SKIPRWLOCKS
 LIBRADOS_OPERATION_IGNORE_OVERLAY = _LIBRADOS_OPERATION_IGNORE_OVERLAY
 
-LIBRADOS_ALL_NSPACES = _LIBRADOS_ALL_NSPACES.decode('utf-8')
+LIBRADOS_ALL_NSPACES = _LIBRADOS_ALL_NSPACES#.decode('utf-8')
 
 LIBRADOS_CREATE_EXCLUSIVE = _LIBRADOS_CREATE_EXCLUSIVE
 LIBRADOS_CREATE_IDEMPOTENT = _LIBRADOS_CREATE_IDEMPOTENT
@@ -553,7 +553,7 @@ def decode_cstr(val, encoding="utf-8"):
     if val is None:
         return None
 
-    return val.decode(encoding)
+    return val#.decode(encoding)
 
 
 cdef char* opt_str(s) except? NULL:
@@ -4081,4 +4081,3 @@ class MonitorLog(object):
         self.arg = arg
         self.cluster = cluster
         self.cluster.monitor_log(level, callback, arg)
-
