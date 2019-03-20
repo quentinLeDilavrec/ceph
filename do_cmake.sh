@@ -41,7 +41,7 @@ fi
 cd simgrid
 mkdir -p build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=$PWD/../../simgrid-install ..
-source ../BuildSimGrid.sh
+/bin/bash ../BuildSimGrid.sh
 make -j$(nproc) && make install
 cd ..
 
