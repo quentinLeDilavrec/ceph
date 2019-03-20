@@ -39,7 +39,7 @@ if [ ! -d simgrid ]; then
 fi
 cd simgrid
 mkdir -p build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=$PWD/../simgrid-install ..
+cmake -DCMAKE_INSTALL_PREFIX=$PWD/../../simgrid-install ..w
 source ../BuildSimGrid.sh
 make -j$(nproc) && make install
 cd ..
@@ -50,7 +50,7 @@ if [ ! -d remote-simgrid ]; then
 fi
 cd remote-simgrid
 mkdir -p build && cd build
-cmake -DSimGrid_INCLUDE_DIR=$PWD/../simgrid-install/include -DSimGrid_LIBRARY=$PWD/../simgrid-#install/lib/libsimgrid.so -DCMAKE_INSTALL_PREFIX=$PWD../rsg-install ..
+cmake -DSimGrid_INCLUDE_DIR=$PWD/../../simgrid-install/include -DSimGrid_LIBRARY=$PWD/../../simgrid-#install/lib/libsimgrid.so -DCMAKE_INSTALL_PREFIX=$PWD../../rsg-install ..
 make -j$(nproc) && make install
 cd ..
 
